@@ -18,6 +18,20 @@ function getPartDay($h){
 		margin: auto;
 		font-size: 25px;
 	}
+	nav a {
+		text-decoration: none;
+		color: #555;
+		background: #eee;
+		padding: 10px;
+	}
+	nav ul {
+		padding: 0;
+		display: flex;
+		justify-content: space-around;
+	}
+	nav li {
+		list-style: none;
+	}
 </style>
 </head>
 <body>
