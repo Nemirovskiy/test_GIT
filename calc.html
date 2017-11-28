@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Калькулятор</title>
+	<style>
+	td:active {
+   		background: #bdbdbd;
+	}
+	td {
+	    text-align: center;
+	    border: 1px solid #ccc;
+	}
+	table {
+	    width: 300px;
+	    height: 350px;
+	    background: #eee;
+	    border: 2px solid #ccc;
+	    margin: auto;
+	    border-collapse: collapse;
+	}
+	tr:first-of-type td {
+	    text-align: right;
+	    padding: 0 10px;
+	}
+	tr:first-of-type td:active {
+	    background: #eee;
+	}
+	</style>
+	<script>
+		//var enterSimb; //введенный символ или число
+		var arrNumbers=''; //сохраненный набор введеных символов и чисел
+		var result=0;	//результат
+		var drive='';	//действие
+		var number=0;	//
+		var number2=0;	//
+		var outStr;		//строка для вывода
+		var outRes;		//строка для вывода
+		// функция нажатия на кнопки таблицы
+		function getKlick(key){
+			//console.log(key.target.innerHTML);
+			//outStr.innerHTML = key.key;
+			getCalc(key.target.innerHTML)
+		}
+		// функция перехвата клавиатуры
+		function getKey(key){
+			getCalc(key.key);
+			//console.log(enterSimb);
+			//outStr.innerHTML = arrNumbers;
+			}
+		function getCalc(enterSimb){
+			//number = parseFloat(number);
+			//if(result!='')
+			if(!isNaN(enterSimb)){
+				arrNumbers = arrNumbers + enterSimb;
+				if(number== null) number = enterSimb;
+				else number = String(number) + String(enterSimb);
+				number = parseFloat(number);
+				enterSimb ='';
+				console.log("enterSimb:"+enterSimb+' number"'+number+'"');
+			}
+			else {
+				drive = enterSimb;
+				if(result==0) result = number;
+				number = null;
+			}
+			//if(enterSimb != drive)
+			{
+			//console.log("enterSimb:"+ enterSimb+"\nnumber:"+number);
+			switch(drive){
+				case '/': 
+					if(parseFloat(number) != 0){
+					if(number!=null) outRes.innerHTML=result = result / parseFloat(number); 
+					arrNumbers = arrNumbers +' '+enterSimb; 
+					//number = 0;	
+					}
+					else arrNumbers = arrNumbers +' деление на ноль!';
+					break;
+				case '*': 
+					if(number!=null)outRes.innerHTML=result = result*parseFloat(number); 
+					arrNumbers = arrNumbers +' '+enterSimb; 
+					//number = 0;
+					break;
+				case '+': 
+					if(number!=null)outRes.innerHTML=result = result+parseFloat(number); 
+					arrNumbers = arrNumbers +' '+enterSimb; 
+					//number = 0;
+					break;
+				case '-': 
+					if(number!=null)outRes.innerHTML=result = result-parseFloat(number); 
+					arrNumbers = arrNumbers +' '+enterSimb; 
+					//number = 0;
+					break;
+				case '=': 
+					arrNumbers = arrNumbers +' = '+result; 
+					//number = 0;
+					break;
+				case 'Enter': 
+					arrNumbers = arrNumbers +' = '+result; 
+					//number = 0;
+					break;
+				case '.': // если точка - добавим её только если нет точки
+					if(String(number).substr(-1)!='.' && number!=null){
+						number = String(number) +'.';
+						arrNumbers = arrNumbers +'.';
+						drive ='';
+					}
+					break;
+				case ',': 
+					if(String(number).substr(-1)!='.' && number!=null){
+						number = String(number) +'.';
+						arrNumbers = arrNumbers +'.';
+						drive = '';
+					} 
+					break;
+				case 'C': 
+					clean();
+					break;
+			}
+			}
+			console.log("result:"+result);
+			outStr.innerHTML = arrNumbers;
+		}
+
+			// функция сброса
+		function clean(){
+		enterSimb=''; 
+		arrNumbers='0'; 
+		result=0;
+		drive=''; 
+		number=0;
+		outStr.innerHTML=result;
+		outRes.innerHTML='';
+		}
+		// запускаем программу после загрузки страницы
+		window.onload = function(){
+			outStr = document.getElementById("out");
+			outRes = document.getElementById("res");
+			table.addEventListener("click", getKlick);
+			addEventListener("keydown", getKey);
+		};
+	</script>
+</head>
+<body>
+	<table id="table">
+		<tr>
+			<td id="" colspan="4">
+				<span id="out">
+					
+				</span><br>
+				<span id="res">
+					
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<td>7</td>
+			<td>8</td>
+			<td>9</td>
+			<td>/</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>5</td>
+			<td>6</td>
+			<td>*</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td>0</td>
+			<td>.</td>
+			<td> </td>
+			<td rowspan="2">+</td>
+		</tr>
+		<tr>
+			<td>C</td>
+			<td colspan="2">=</td>
+		</tr>
+	</table>
+
+</body>
+</html>
