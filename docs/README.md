@@ -1,2 +1,0 @@
-#index
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure voluptas nihil repellat alias error corporis fugiat, laboriosam quisquam exercitationem ratione eaque accusantium totam obcaecati eveniet minus sed asperiores quia deleniti!
